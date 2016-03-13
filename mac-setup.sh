@@ -2,7 +2,7 @@
 
 #Install homebrew
 
-if [ ! -x /usr/local/bin/brew ] ; then 
+if [ ! -x /usr/local/bin/brew ] ; then
 	echo "installing homebrew"
 	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
@@ -16,7 +16,7 @@ brew_apps=(
 	git
 	go
 	hub
-	caskroom/cask/brew-cask 
+	caskroom/cask/brew-cask
 	tmux
 	homebrew/x11/freerdp
 	nmap
@@ -26,14 +26,14 @@ echo "Installing homebrew apps ${brew_apps[@]}"
 brew install ${brew_apps[@]}
 
 cask_apps=(
-	alfred 
+	alfred
 	boot2docker
-	caffeine 
-	iterm2 
-	evernote 
+	caffeine
+	iterm2
+	evernote
 	flux
-	cyberduck 
-	little-snitch 
+	cyberduck
+	little-snitch
 	gitbook
 	github-desktop
 	sublime-text3
@@ -73,3 +73,5 @@ brew cask install ${fonts[@]}
 # http://www.alfredforum.com/topic/1710-another-nest-thermostat-workflow/
 # https://github.com/jason0x43/alfred-hue/releases
 # http://www.packal.org/workflow/packal-updater
+# http://www.packal.org/workflow/homebrew-and-cask-alfred
+# http://www.packal.org/workflow/github-command-bar
