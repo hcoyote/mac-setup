@@ -8,12 +8,17 @@ if [ ! -x /usr/local/bin/brew ] ; then
 fi
 
 # disable system boot sound
+echo "Disabling system boot sound"
 sudo nvram -d SystemAudioVolume
+
+echo "Disabling Spotlight indexing for any volume that gets mounted and has not yet been indexed before"
+sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
 
 
 brew_apps=(
 	ack
 	atom
+	ctags
 	git
 	go
 	hub
@@ -69,6 +74,17 @@ fonts=(
 # install fonts
 echo "installing fonts..."
 brew cask install ${fonts[@]}
+
+# install atom packages
+echo "Installing atom packages"
+
+atom_packages=(
+	vim-mode
+)
+for apm in $atom_packages ; do
+	echo "  $apm"
+	apm install $apm
+done
 
 # alfred workflows.
 # http://www.alfredforum.com/topic/1710-another-nest-thermostat-workflow/
