@@ -13,6 +13,7 @@ sudo nvram -d SystemAudioVolume
 
 brew_apps=(
 	ack
+	atom
 	git
 	go
 	hub
