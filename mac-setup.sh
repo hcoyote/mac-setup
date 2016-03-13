@@ -60,6 +60,7 @@ defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 brew_apps=(
 	ack
 	atom
+	bash
 	ctags
 	git
 	go
@@ -70,6 +71,11 @@ brew_apps=(
 	homebrew/x11/freerdp
 	nmap
 	)
+
+echo "Adding bash to /etc/shells"
+sudo sed -i '$ a\
+/usr/local/bin/bash
+' /etc/shells
 
 echo "Installing homebrew apps ${brew_apps[@]}"
 brew install ${brew_apps[@]}
