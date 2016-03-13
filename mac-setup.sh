@@ -82,7 +82,7 @@ brew install ${brew_apps[@]}
 
 cask_apps=(
 	alfred
-	boot2docker
+	#boot2docker
 	caffeine
 	iterm2
 	evernote
