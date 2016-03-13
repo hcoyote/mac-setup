@@ -73,7 +73,7 @@ brew_apps=(
 	)
 
 echo "Adding bash to /etc/shells"
-sudo sed -i '$ a\
+grep -q /usr/local/bin/bash /etc/shells || sudo sed -i '$ a\
 /usr/local/bin/bash
 ' /etc/shells
 
