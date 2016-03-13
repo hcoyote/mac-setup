@@ -62,6 +62,7 @@ brew_apps=(
 	git
 	go
 	hub
+	jq
 	caskroom/cask/brew-cask
 	tmux
 	homebrew/x11/freerdp
