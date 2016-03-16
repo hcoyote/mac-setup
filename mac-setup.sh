@@ -70,6 +70,7 @@ brew_apps=(
 	tmux
 	homebrew/x11/freerdp
 	nmap
+	pdsh
 	)
 
 echo "Adding bash to /etc/shells"
@@ -82,8 +83,8 @@ brew install ${brew_apps[@]}
 
 cask_apps=(
 	alfred
-	#boot2docker
 	caffeine
+	dockertoolbox
 	iterm2
 	evernote
 	flux
