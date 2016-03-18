@@ -67,6 +67,8 @@ brew_apps=(
 	hub
 	jq
 	caskroom/cask/brew-cask
+	mtr
+	freerdp
 	tmux
 	homebrew/x11/freerdp
 	nmap
@@ -142,3 +144,4 @@ done
 # http://www.packal.org/workflow/packal-updater
 # http://www.packal.org/workflow/homebrew-and-cask-alfred
 # http://www.packal.org/workflow/github-command-bar
+# http://www.packal.org/workflow/chrome-bookmarks
