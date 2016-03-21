@@ -5,8 +5,8 @@ sudo -v
 #Install homebrew
 
 if [ ! -x /usr/local/bin/brew ] ; then
-	echo "installing homebrew"
-	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    echo "installing homebrew"
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
 echo "Disabling system boot sound"
@@ -38,7 +38,7 @@ defaults write com.apple.screensaver askForPassword -int 1
 defaults write com.apple.screensaver askForPasswordDelay -int 0
 
 if [ ! -d $HOME/Pictures/Screenshots ]; then
-	mkdir -p $HOME/Pictures/Screenshots
+    mkdir -p $HOME/Pictures/Screenshots
 fi
 echo "Setting location to $HOME/Pictures/Screenshots"
 defaults write com.apple.screencapture location -string "$HOME/Pictures/Screenshots"
@@ -58,23 +58,23 @@ defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 
 
 brew_apps=(
-	ack
-	atom
-	bash
-	ctags
-	git
-	go
-	hub
-	jq
-	caskroom/cask/brew-cask
-	mtr
-	freerdp
-	tmux
-	homebrew/x11/freerdp
-	nmap
-	pdsh
+    ack
+    atom
+    bash
+    ctags
+    git
+    go
+    hub
+    jq
+    caskroom/cask/brew-cask
+    mtr
+    freerdp
+    tmux
+    homebrew/x11/freerdp
+    nmap
+    pdsh
     shellcheck
-	)
+    )
 
 echo "Adding bash to /etc/shells"
 grep -q /usr/local/bin/bash /etc/shells || sudo sed -i '$ a\
@@ -85,25 +85,25 @@ echo "Installing homebrew apps ${brew_apps[@]}"
 brew install ${brew_apps[@]}
 
 cask_apps=(
-	alfred
-	caffeine
-	dockertoolbox
-	iterm2
-	evernote
-	flux
-	cyberduck
-	little-snitch
-	gitbook
-	github-desktop
-	sublime-text3
-	virtualbox
-	vagrant
-	slack
-	screenflick
-	dropbox
-	wireshark
-	qlprettypatch
-	vlc
+    alfred
+    caffeine
+    dockertoolbox
+    iterm2
+    evernote
+    flux
+    cyberduck
+    little-snitch
+    gitbook
+    github-desktop
+    sublime-text3
+    virtualbox
+    vagrant
+    slack
+    screenflick
+    dropbox
+    wireshark
+    qlprettypatch
+    vlc
 )
 echo "Installing ${cask_apps[@]}"
 brew cask install ${cask_apps[@]}
@@ -114,8 +114,8 @@ fonts
 versions
 "
 for tap in $cask_taps; do
-	echo "	$tap"
-	brew tap caskroom/$tap
+    echo "    $tap"
+    brew tap caskroom/$tap
 done
 
 fonts=(
@@ -132,11 +132,11 @@ brew cask install ${fonts[@]}
 echo "Installing atom packages"
 
 atom_packages=(
-	vim-mode
+    vim-mode
 )
 for apm in $atom_packages ; do
-	echo "  $apm"
-	apm install $apm
+    echo "  $apm"
+    apm install $apm
 done
 
 # alfred workflows.
