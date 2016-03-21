@@ -73,6 +73,7 @@ brew_apps=(
 	homebrew/x11/freerdp
 	nmap
 	pdsh
+    shellcheck
 	)
 
 echo "Adding bash to /etc/shells"
