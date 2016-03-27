@@ -91,6 +91,7 @@ cask_apps=(
     iterm2
     evernote
     flux
+    freemind
     cyberduck
     little-snitch
     gitbook
@@ -104,6 +105,8 @@ cask_apps=(
     wireshark
     qlprettypatch
     vlc
+    4k-youtube-to-mp3
+    macx-youtube-downloader
 )
 echo "Installing ${cask_apps[@]}"
 brew cask install ${cask_apps[@]}
