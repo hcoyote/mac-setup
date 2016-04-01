@@ -74,6 +74,8 @@ brew_apps=(
     nmap
     pdsh
     shellcheck
+    aws-shell
+    awscli
     )
 
 echo "Adding bash to /etc/shells"
