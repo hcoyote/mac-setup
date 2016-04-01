@@ -107,6 +107,7 @@ cask_apps=(
     vlc
     4k-youtube-to-mp3
     macx-youtube-downloader
+    bartender
 )
 echo "Installing ${cask_apps[@]}"
 brew cask install ${cask_apps[@]}
