@@ -76,6 +76,8 @@ brew_apps=(
     shellcheck
     aws-shell
     awscli
+    packer
+    terraform
     )
 
 echo "Adding bash to /etc/shells"
