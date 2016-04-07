@@ -71,6 +71,7 @@ brew_apps=(
     freerdp
     tmux
     homebrew/x11/freerdp
+    myrepos
     nmap
     pdsh
     shellcheck
