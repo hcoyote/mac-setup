@@ -79,6 +79,7 @@ brew_apps=(
     awscli
     packer
     terraform
+    thefuck
     )
 
 echo "Adding bash to /etc/shells"
