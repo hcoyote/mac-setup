@@ -114,6 +114,7 @@ cask_apps=(
     4k-youtube-to-mp3
     macx-youtube-downloader
     bartender
+    controlplane
 )
 echo "Installing ${cask_apps[@]}"
 brew cask install ${cask_apps[@]}
@@ -156,3 +157,6 @@ done
 # http://www.packal.org/workflow/homebrew-and-cask-alfred
 # http://www.packal.org/workflow/github-command-bar
 # http://www.packal.org/workflow/chrome-bookmarks
+
+# control plane workflows
+# 
