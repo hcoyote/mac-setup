@@ -80,6 +80,7 @@ brew_apps=(
     packer
     terraform
     thefuck
+    azure-cli
     )
 
 echo "Adding bash to /etc/shells"
