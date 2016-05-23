@@ -151,6 +151,10 @@ for apm in $atom_packages ; do
     apm install $apm
 done
 
+# add some completion stuff.
+curl -L https://raw.githubusercontent.com/docker/docker/master/contrib/completion/bash/docker -o /usr/local/etc/bash_completion.d/docker
+
+
 # alfred workflows.
 # http://www.alfredforum.com/topic/1710-another-nest-thermostat-workflow/
 # https://github.com/jason0x43/alfred-hue/releases
