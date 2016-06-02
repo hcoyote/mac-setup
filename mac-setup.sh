@@ -116,6 +116,7 @@ cask_apps=(
     macx-youtube-downloader
     bartender
     controlplane
+    intellij-idea
 )
 echo "Installing ${cask_apps[@]}"
 brew cask install ${cask_apps[@]}
