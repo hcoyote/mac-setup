@@ -81,6 +81,7 @@ brew_apps=(
     terraform
     thefuck
     azure-cli
+    maven
     )
 
 echo "Adding bash to /etc/shells"
