@@ -37,6 +37,9 @@ echo "Requiring password immediately after sleep or screen saver begins"
 defaults write com.apple.screensaver askForPassword -int 1
 defaults write com.apple.screensaver askForPasswordDelay -int 0
 
+echo "Make Chrome use the right print dialog"
+defaults write com.google.Chrome DisablePrintPreview -bool true
+
 if [ ! -d $HOME/Pictures/Screenshots ]; then
     mkdir -p $HOME/Pictures/Screenshots
 fi
