@@ -62,7 +62,6 @@ defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 
 brew_apps=(
     ack
-    atom
     bash
     ctags
     git
@@ -88,7 +87,7 @@ brew_apps=(
     )
 
 echo "Adding bash to /etc/shells"
-grep -q /usr/local/bin/bash /etc/shells || sudo sed -i '$ a\
+grep -q /usr/local/bin/bash /etc/shells || sudo sed -i -e '$ a\
 /usr/local/bin/bash
 ' /etc/shells
 
@@ -98,16 +97,16 @@ brew install ${brew_apps[@]}
 cask_apps=(
     alfred
     caffeine
-    dockertoolbox
+    docker-toolbox
     iterm2
     evernote
     flux
     freemind
     cyberduck
     little-snitch
-    gitbook
+    
     github-desktop
-    sublime-text3
+    
     virtualbox
     vagrant
     slack
