@@ -59,6 +59,9 @@ echo "Display full POSIX path as Finder window title"
 defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 
 
+brew_taps="
+hcoyote-personal
+"
 
 brew_apps=(
     ack
@@ -91,6 +94,14 @@ echo "Adding bash to /etc/shells"
 grep -q /usr/local/bin/bash /etc/shells || sudo sed -i '$ a\
 /usr/local/bin/bash
 ' /etc/shells
+
+echo "Installing brew taps"
+for tap in $brew_taps; do
+    echo "    $tap"
+    brew tap $tap
+done
+
+
 
 echo "Installing homebrew apps ${brew_apps[@]}"
 brew install ${brew_apps[@]}
