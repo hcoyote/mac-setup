@@ -88,6 +88,7 @@ brew_apps=(
     thefuck
     azure-cli
     maven
+    pv
     )
 
 echo "Adding bash to /etc/shells"
