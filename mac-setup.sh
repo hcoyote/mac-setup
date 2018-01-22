@@ -89,6 +89,8 @@ brew_apps=(
     azure-cli
     maven
     pv
+    zmwangx/npm-noob/noob
+    rtm-cli
     )
 
 echo "Adding bash to /etc/shells"
