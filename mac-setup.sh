@@ -91,6 +91,7 @@ brew_apps=(
     zmwangx/npm-noob/noob
     rtm-cli
     watch
+    xmlstarlet
     )
 
 echo "Adding bash to /etc/shells"
@@ -110,31 +111,15 @@ echo "Installing homebrew apps ${brew_apps[@]}"
 brew install ${brew_apps[@]}
 
 cask_apps=(
-    alfred
-    caffeine
-    docker-toolbox
-    iterm2
-    evernote
-    flux
-    freemind
-    cyberduck
-    little-snitch
-    
-    github-desktop
-    
-    virtualbox
-    vagrant
-    slack
-    screenflick
-    dropbox
-    wireshark
-    qlprettypatch
-    vlc
-    4k-youtube-to-mp3
-    macx-youtube-downloader
-    bartender
-    controlplane
-    intellij-idea
+4k-youtube-to-mp3           cubicsdr                    font-montserrat             istat-menus                 macx-youtube-downloader     screenflick
+alfred                      cyberduck                   font-roboto                 iterm2                      osxfuse                     slack
+apache-directory-studio     dockertoolbox               freemind                    java                        packer                      terraform
+atom                        dropbox                     gitbook                     jira-client                 pineapple                   vagrant
+bartender                   evernote                    github-desktop              keybase                     pycharm                     virtualbox
+boot2docker                 flux                        goland                      keycastr                    qlprettypatch               vlc
+caffeine                    font-clear-sans             google-drive                kitematic                   r-app                       webex-nbr-player
+chirp-daily                 font-droid-serif            gqrx                        kk7ds-python-runtime        real-vnc                    wireshark
+controlplane                font-m-plus                 intellij-idea               little-snitch               rstudio                     xquartz
 )
 echo "Installing ${cask_apps[@]}"
 brew cask install ${cask_apps[@]}
