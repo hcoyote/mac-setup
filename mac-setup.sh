@@ -90,6 +90,7 @@ brew_apps=(
     pv
     zmwangx/npm-noob/noob
     rtm-cli
+    watch
     )
 
 echo "Adding bash to /etc/shells"
