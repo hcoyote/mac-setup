@@ -87,6 +87,7 @@ brew_apps=(
     thefuck
     azure-cli
     maven
+    mas
     pv
     zmwangx/npm-noob/noob
     rtm-cli
