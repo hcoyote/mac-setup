@@ -121,6 +121,7 @@ boot2docker                 flux                        goland                  
 caffeine                    font-clear-sans             google-drive                kitematic                   r-app                       webex-nbr-player
 chirp-daily                 font-droid-serif            gqrx                        kk7ds-python-runtime        real-vnc                    wireshark
 controlplane                font-m-plus                 intellij-idea               little-snitch               rstudio                     xquartz
+karabiner-elements
 )
 echo "Installing ${cask_apps[@]}"
 brew cask install ${cask_apps[@]}
