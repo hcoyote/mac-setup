@@ -68,6 +68,7 @@ brew_apps=(
     bash
     ctags
     git
+    gh
     go
     hub
     jq
