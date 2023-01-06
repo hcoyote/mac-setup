@@ -71,74 +71,7 @@ brew_taps="
 #hcoyote-personal
 "
 
-brew_apps=(
-
-    bdw-gc
-    c-ares
-    ca-certificates
-    cairo
-    docker-machine
-    fontconfig
-    fortune
-    freetype
-    gettext
-    gh
-    giflib
-    github-keygen
-    glib
-    gmp
-    gnutls
-    graphite2
-    guile
-    harfbuzz
-    helm
-    icu4c
-    jpeg-turbo
-    kubernetes-cli
-    libevent
-    libgcrypt
-    libgpg-error
-    libidn2
-    libmaxminddb
-    libnet
-    libnghttp2
-    libpng
-    libsmi
-    libssh
-    libtasn1
-    libtiff
-    libtool
-    libunistring
-    libx11
-    libxau
-    libxcb
-    libxdmcp
-    libxext
-    libxrender
-    little-cms2
-    lua
-    lz4
-    lzo
-    m4
-    minikube
-    nettle
-    openjdk
-    openssl@1.1
-    p11-kit
-    packer
-    pcre2
-    pixman
-    pkg-config
-    readline
-    ripgrep
-    tcptraceroute
-    terraform
-    unbound
-    xorgproto
-    xz
-    zstd
-
-    )
+brew_apps=$(cat etc/brew_formula.txt)
 
 echo "Adding bash to /etc/shells"
 grep -q /usr/local/bin/bash /etc/shells || sudo sed -i -e '$ a\
@@ -160,52 +93,7 @@ for app in ${brew_apps[@]}; do
     brew list ${app} >/dev/null 2>&1 || brew install ${app}
 done
 
-cask_apps=(
-    1password
-    4k-youtube-to-mp3
-    alfred
-    apache-directory-studio
-    bartender
-    caffeine
-    controlplane
-    cyberduck
-    docker
-    dropbox
-    elgato-camera-hub
-    elgato-control-center
-    evernote
-    font-clear-sans
-    font-montserrat
-    font-roboto
-    freemind
-    github
-    goland
-    google-chrome
-    google-drive
-    intellij-idea
-    istat-menus
-    iterm2
-    karabiner-elements
-    keybase
-    keycastr
-    kitematic
-    little-snitch
-    macfuse
-    macx-youtube-downloader
-    notion
-    obs
-    pineapple
-    pycharm
-    qlprettypatch
-    rstudio
-    screenflick
-    shottr
-    vagrant
-    vlc
-    wireshark
-    xquartz
-
-)
+cask_apps=$(cat etc/brew_casks.txt)
 echo "Installing ${cask_apps[@]}"
 for app in ${cask_apps[@]}; do
     sudo -v
