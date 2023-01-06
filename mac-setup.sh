@@ -143,3 +143,6 @@ if [ ! -d $HOME/.oh-my-zsh ] ; then
 else
     echo oh-my-zsh already loaded
 fi
+
+# copy over bin/ files
+rsync -avp bin/ $HOME/bin/
