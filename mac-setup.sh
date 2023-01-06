@@ -2,11 +2,20 @@
 
 sudo -v
 
-#Install homebrew
+# install rosetta if needed
+if [[ "$(arch)" =~ "arm64" ]] ; then
+	echo Installing Rosetta just in case
+	/usr/sbin/softwareupdate --install-rosetta --agree-to-license
+fi
 
-if [ ! -x /usr/local/bin/brew ] ; then
+#Install homebrew
+PATH=/opt/homebrew/bin:/usr/local/bin:$PATH
+export PATH
+
+if [ ! -x /opt/homebrew/bin/brew ] ; then
     echo "installing homebrew"
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    #ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
 echo "Disabling system boot sound"
@@ -60,40 +69,76 @@ defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 
 
 brew_taps="
-hcoyote-personal
+#hcoyote-personal
 "
 
 brew_apps=(
-    ack
-    bash
-    ctags
-    git
-    gh
-    go
-    hub
-    jq
-    caskroom/cask/brew-cask
-    mtr
-    freerdp
-    tmux
-    homebrew/x11/freerdp
-    myrepos
-    nmap
-    pdsh
-    shellcheck
-    aws-shell
-    awscli
-    packer
-    terraform
-    thefuck
-    azure-cli
-    maven
-    mas
-    pv
-    zmwangx/npm-noob/noob
-    rtm-cli
-    watch
-    xmlstarlet
+
+	bdw-gc
+	c-ares
+	ca-certificates
+	cairo
+	docker-machine
+	fontconfig
+	fortune
+	freetype
+	gettext
+	gh
+	giflib
+	github-keygen
+	glib
+	gmp
+	gnutls
+	graphite2
+	guile
+	harfbuzz
+	helm
+	icu4c
+	jpeg-turbo
+	kubernetes-cli
+	libevent
+	libgcrypt
+	libgpg-error
+	libidn2
+	libmaxminddb
+	libnet
+	libnghttp2
+	libpng
+	libsmi
+	libssh
+	libtasn1
+	libtiff
+	libtool
+	libunistring
+	libx11
+	libxau
+	libxcb
+	libxdmcp
+	libxext
+	libxrender
+	little-cms2
+	lua
+	lz4
+	lzo
+	m4
+	minikube
+	nettle
+	openjdk
+	openssl@1.1
+	p11-kit
+	packer
+	pcre2
+	pixman
+	pkg-config
+	readline
+	ripgrep
+	tcptraceroute
+	terraform
+	unbound
+	xorgproto
+	xz
+	zstd
+
     )
 
 echo "Adding bash to /etc/shells"
@@ -103,6 +148,7 @@ grep -q /usr/local/bin/bash /etc/shells || sudo sed -i -e '$ a\
 
 echo "Installing brew taps"
 for tap in $brew_taps; do
+    sudo -v
     echo "    $tap"
     brew tap $tap
 done
@@ -110,56 +156,88 @@ done
 
 
 echo "Installing homebrew apps ${brew_apps[@]}"
-brew install ${brew_apps[@]}
+for app in ${brew_apps[@]}; do
+	echo checking ${app}
+	brew list ${app} >/dev/null 2>&1 || brew install ${app}
+done
 
 cask_apps=(
-4k-youtube-to-mp3           cubicsdr                    font-montserrat             istat-menus                 macx-youtube-downloader     screenflick
-alfred                      cyberduck                   font-roboto                 iterm2                      osxfuse                     slack
-apache-directory-studio     dockertoolbox               freemind                    java                        packer                      terraform
-atom                        dropbox                     gitbook                     jira-client                 pineapple                   vagrant
-bartender                   evernote                    github-desktop              keybase                     pycharm                     virtualbox
-boot2docker                 flux                        goland                      keycastr                    qlprettypatch               vlc
-caffeine                    font-clear-sans             google-drive                kitematic                   r-app                       webex-nbr-player
-chirp-daily                 font-droid-serif            gqrx                        kk7ds-python-runtime        real-vnc                    wireshark
-controlplane                font-m-plus                 intellij-idea               little-snitch               rstudio                     xquartz
-karabiner-elements
+	1password
+	4k-youtube-to-mp3
+	alfred
+	apache-directory-studio
+	bartender
+	caffeine
+	controlplane
+	cyberduck
+	docker
+	dropbox
+	elgato-camera-hub
+	elgato-control-center
+	evernote
+	font-clear-sans
+	font-montserrat
+	font-roboto
+	freemind
+	github
+	goland
+	google-chrome
+	google-drive
+	intellij-idea
+	istat-menus
+	iterm2
+	karabiner-elements
+	keybase
+	keycastr
+	kitematic
+	little-snitch
+	macfuse
+	macx-youtube-downloader
+	notion
+	obs
+	pineapple
+	pycharm
+	qlprettypatch
+	rstudio
+	screenflick
+	shottr
+	vagrant
+	vlc
+	wireshark
+	xquartz
+
 )
 echo "Installing ${cask_apps[@]}"
-brew cask install ${cask_apps[@]}
+for app in ${cask_apps[@]}; do
+	sudo -v
+	echo checking ${app}
+	brew list --cask ${app} >/dev/null 2>&1 || brew install --cask ${app}
+done
 
 echo "Installing caskroom taps"
 cask_taps="
 fonts
 versions
+drivers
 "
 for tap in $cask_taps; do
     echo "    $tap"
-    brew tap caskroom/$tap
+    brew tap homebrew/cask-$tap
 done
 
 fonts=(
-  font-m-plus
   font-clear-sans
   font-roboto
 )
 
 # install fonts
 echo "installing fonts..."
-brew cask install ${fonts[@]}
-
-# install atom packages
-echo "Installing atom packages"
-
-atom_packages=(
-    vim-mode
-)
-for apm in $atom_packages ; do
-    echo "  $apm"
-    apm install $apm
-done
+brew install ${fonts[@]}
 
 # add some completion stuff.
-curl -L https://raw.githubusercontent.com/docker/docker/master/contrib/completion/bash/docker -o /usr/local/etc/bash_completion.d/docker
+if [ ! -f /opt/homebrew/etc/bash_completion.d/docker ] ; then
+	curl -L https://raw.githubusercontent.com/docker/docker/master/contrib/completion/bash/docker -o /opt/homebrew/etc/bash_completion.d/docker
+fi
 
 
 # alfred workflows.
@@ -172,3 +250,9 @@ curl -L https://raw.githubusercontent.com/docker/docker/master/contrib/completio
 
 # control plane workflows
 # 
+
+if [ ! -d $HOME/.oh-my-zsh ] ; then
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+else
+	echo oh-my-zsh already loaded
+fi
