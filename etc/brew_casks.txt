@@ -42,3 +42,4 @@
     wireshark
     xquartz
 
+streamlabs-obs
