@@ -43,3 +43,4 @@
     xquartz
 
 streamlabs-obs
+drawio
