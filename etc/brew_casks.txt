@@ -1,46 +1,48 @@
-    1password
-    4k-youtube-to-mp3
-    alfred
-    apache-directory-studio
-    bartender
-    caffeine
-    controlplane
-    cyberduck
-    docker
-    dropbox
-    elgato-camera-hub
-    elgato-control-center
-    evernote
-    font-clear-sans
-    font-montserrat
-    font-roboto
-    freemind
-    github
-    goland
-    google-chrome
-    google-drive
-    intellij-idea
-    istat-menus
-    iterm2
-    karabiner-elements
-    keybase
-    keycastr
-    kitematic
-    little-snitch
-    macfuse
-    macx-youtube-downloader
-    notion
-    obs
-    pineapple
-    pycharm
-    qlprettypatch
-    rstudio
-    screenflick
-    shottr
-    vagrant
-    vlc
-    wireshark
-    xquartz
-
-streamlabs-obs
+1password
+4k-youtube-to-mp3
+alfred
+apache-directory-studio
+bartender
+caffeine
+clion
+controlplane
+cyberduck
+docker
 drawio
+dropbox
+elgato-camera-hub
+elgato-control-center
+elgato-stream-deck
+evernote
+font-clear-sans
+font-montserrat
+font-roboto
+freemind
+github
+goland
+google-chrome
+google-cloud-sdk
+google-drive
+intellij-idea
+istat-menus
+iterm2
+karabiner-elements
+keybase
+keycastr
+kitematic
+little-snitch
+macfuse
+macx-youtube-downloader
+notion
+obs
+pineapple
+pycharm
+qlprettypatch
+rstudio
+screenflick
+shottr
+streamlabs-obs
+vagrant
+vlc
+wireshark
+xquartz
