@@ -146,3 +146,12 @@ fi
 
 # copy over bin/ files
 rsync -avp bin/ $HOME/bin/
+rsync -avp zshrc $HOME/.zshrc
+
+echo "adding third-party plugins for omz"
+for i in dmakeienko/azcli ; do
+	cd $HOME/.oh-my-zsh/custom/plugins
+	if [[ ! -d "$(basename $i) ]] ; then
+		gh repo clone #i
+	fi
+done
