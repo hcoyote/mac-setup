@@ -66,6 +66,7 @@ lz4
 lzo
 m4
 maven
+mcfly
 minikube
 mpdecimal
 ncurses

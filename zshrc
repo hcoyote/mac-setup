@@ -104,3 +104,8 @@ source $ZSH/oh-my-zsh.sh
 
 autoload select-word-style
 select-word-style shell
+
+if which mcfly >/dev/null 2>&1; then
+	eval "$(mcfly init zsh)"
+fi
+

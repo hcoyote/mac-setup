@@ -69,6 +69,7 @@ defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 
 brew_taps="
 #hcoyote-personal
+cantino/mcfly
 "
 
 brew_apps=$(cat etc/brew_formula.txt)
