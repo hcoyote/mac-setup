@@ -1,5 +1,48 @@
 #!/bin/bash
 
+seconds=30
+region=us-west-2
+AWS_USER=ubuntu
+
+# Usage info
+show_help() {
+cat << EOF
+Usage: ${0##*/} [-hv] [-f OUTFILE] [FILE]...
+
+Make it easier to login to an AWS node with Name=<user>-runner and load up 
+any additional AWS creds in clipboard and/or passed along via environment
+variables for use on the other side.
+
+    -h          display this help and exit
+    -c          copy AWS creds to clipboard and restore clipboard later
+EOF
+}
+
+OPTIND=1
+# Resetting OPTIND is necessary if getopts was used previously in the script.
+# It is a good idea to make OPTIND local if you process options in a function.
+
+while getopts hrc opt; do
+    case $opt in
+        h)
+            show_help
+            exit 0
+            ;;
+        c)  CREDS_TO_CLIPBOARD=1
+            ;;
+        r)  region=${OPTIND}
+	    ;;
+        u)  AWS_USER=${OPTIND}
+	    ;;
+        *)
+            show_help >&2
+            exit 1
+            ;;
+    esac
+done
+shift "$((OPTIND-1))"   # Discard the options and sentinel --
+
+
 if ! command -v aws &> /dev/null ; then
 	echo >&2 "install aws cli; aborting"
 	exit 1
@@ -10,6 +53,30 @@ if ! aws sts get-caller-identity --no-cli-pager >/dev/null 2>&1 ; then
 	exit 1
 fi
 
-IP=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=`whoami`-runner" --output text --query 'Reservations[*].Instances[*].[PublicIpAddress]' --region us-west-2 --no-cli-pager)
+if aws-sso-creds version >/dev/null 2>&1 ; then
+	eval $(aws-sso-creds export)
+	if [[ -n ${CREDS_TO_CLIPBOARD} ]] ; then
+		# fire up a background shell to revert contents of clipboard after a short period
+		(  
+		  old=$(pbpaste)
+		   if osascript -e return >/dev/null 2>&1; then
+			   osascript -e 'display notification "Reseting clipboard in 30 seconds" with title "sshrunner restore Clipboard"' 
+		   fi
+		   sleep ${seconds}
+		   echo "Restoring clipboard" >&2
+		   echo ${old} | pbcopy 
+		) &
 
-exec ssh -A ubuntu@${IP} $*
+		# make sure we temporarily disable history so creds don't get recorded on the remote side
+		(echo "set +o history" ; aws-sso-creds export ; echo "set -o history") | pbcopy
+		
+	fi
+else
+	echo >&2 "asked for getting temporary creds, but could not find aws-sso-creds command"
+	exit 1
+fi
+
+IP=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=`whoami`-runner" --output text --query 'Reservations[*].Instances[*].[PublicIpAddress]' --region ${region} --no-cli-pager)
+
+# SendEnv requires the remote side to also AcceptEnv, so make sure sshd_config is altered appropriately
+exec ssh -o SendEnv="AWS_*" -A ${AWS_USER}@${IP} $*
