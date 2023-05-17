@@ -50,6 +50,9 @@ fi
 
 if ! aws sts get-caller-identity --no-cli-pager >/dev/null 2>&1 ; then
 	echo >&2 "set aws profile and rerun aws sso login; aborting"
+	if [[ -n ${AWS_ACCESS_KEY_ID} || -n ${AWS_SECRET_ACCESS_KEY} || -n ${AWS_SESSION_TOKEN} ]] ; then
+		echo >&2 'try also: export AWS_ACCESS_KEY_ID=""; export AWS_SECRET_ACCESS_KEY=""; export AWS_SESSION_TOKEN=""'
+	fi
 	exit 1
 fi
 
@@ -76,7 +79,7 @@ else
 	exit 1
 fi
 
-IP=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=whoami`-runner" --output text --query 'Reservations[*].Instances[*].[PublicIpAddress]' --region ${region} --no-cli-pager)
+IP=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=`whoami`-runner" --output text --query 'Reservations[*].Instances[*].[PublicIpAddress]' --region ${region} --no-cli-pager)
 
 # SendEnv requires the remote side to also AcceptEnv, so make sure sshd_config is altered appropriately
 exec ssh -o SendEnv="AWS_*" -A ${AWS_USER}@"${IP}" $*
