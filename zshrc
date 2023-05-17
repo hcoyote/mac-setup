@@ -101,7 +101,8 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias gitme="cd $HOME/Documents/github/hcoyote"
-alias gitwork=cd $HOME/Documents/github/redpanda-data"
+alias gitwork="cd $HOME/Documents/github/redpanda-data"
+alias update=source $HOME/.zshrc
 
 #export FPATH=$HOME/.zsh_functions
 
