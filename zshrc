@@ -100,6 +100,9 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+alias gitme="cd $HOME/Documents/github/hcoyote"
+alias gitwork=cd $HOME/Documents/github/redpanda-data"
+
 #export FPATH=$HOME/.zsh_functions
 
 autoload select-word-style
