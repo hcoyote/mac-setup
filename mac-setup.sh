@@ -148,6 +148,7 @@ fi
 # copy over bin/ files
 rsync -avp bin/ $HOME/bin/
 rsync -avp zshrc $HOME/.zshrc
+rsync -avp oh-my-zsh $HOME/.oh-my-zsh/custom
 
 echo "adding third-party plugins for omz"
 for i in dmakeienko/azcli ; do
