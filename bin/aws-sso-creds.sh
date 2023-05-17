@@ -16,15 +16,17 @@
 source $HOME/.defaults
 export AWS_PROFILE
 
+seconds=30
 # make sure we can restore clipboard
-(
-  old=$(pbpaste)
-   if osascript -e return >/dev/null 2>&1; then
-	   osascript -e 'display notification "Reseting clipboard in 30 seconds" with title "raycast aws-sso-creds restore Clipboard"'
-   fi
-   sleep "${seconds}"
-   echo "${old}" | pbcopy
-) &
+old=$(pbpaste)
+if osascript -e return >/dev/null 2>&1; then
+   osascript -e 'display notification "Reseting clipboard in 30 seconds" with title "raycast aws-sso-creds restore Clipboard"'
+fi
 
 # make sure we temporarily disable history recording when we paste on the other side
 (echo "set +o history"; aws-sso-creds export ; echo "set -o history")| pbcopy
+
+
+
+sleep "${seconds}"
+echo "${old}" | pbcopy
