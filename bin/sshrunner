@@ -22,7 +22,7 @@ OPTIND=1
 # Resetting OPTIND is necessary if getopts was used previously in the script.
 # It is a good idea to make OPTIND local if you process options in a function.
 
-while getopts hrc opt; do
+while getopts hurc opt; do
     case $opt in
         h)
             show_help
@@ -62,9 +62,9 @@ if aws-sso-creds version >/dev/null 2>&1 ; then
 		   if osascript -e return >/dev/null 2>&1; then
 			   osascript -e 'display notification "Reseting clipboard in 30 seconds" with title "sshrunner restore Clipboard"' 
 		   fi
-		   sleep ${seconds}
+		   sleep "${seconds}"
 		   echo "Restoring clipboard" >&2
-		   echo ${old} | pbcopy 
+		   echo "${old}" | pbcopy 
 		) &
 
 		# make sure we temporarily disable history so creds don't get recorded on the remote side
@@ -76,7 +76,7 @@ else
 	exit 1
 fi
 
-IP=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=`whoami`-runner" --output text --query 'Reservations[*].Instances[*].[PublicIpAddress]' --region ${region} --no-cli-pager)
+IP=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=whoami`-runner" --output text --query 'Reservations[*].Instances[*].[PublicIpAddress]' --region ${region} --no-cli-pager)
 
 # SendEnv requires the remote side to also AcceptEnv, so make sure sshd_config is altered appropriately
-exec ssh -o SendEnv="AWS_*" -A ${AWS_USER}@${IP} $*
+exec ssh -o SendEnv="AWS_*" -A ${AWS_USER}@"${IP}" $*
