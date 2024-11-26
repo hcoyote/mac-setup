@@ -57,7 +57,7 @@ if ! aws sts get-caller-identity --no-cli-pager >/dev/null 2>&1 ; then
 fi
 
 if aws-sso-creds version >/dev/null 2>&1 ; then
-	eval $(aws-sso-creds export)
+	eval "$(aws-sso-creds export)"
 	if [[ -n ${CREDS_TO_CLIPBOARD} ]] ; then
 		# fire up a background shell to revert contents of clipboard after a short period
 		(  
@@ -79,7 +79,12 @@ else
 	exit 1
 fi
 
-IP=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=`whoami`-runner" --output text --query 'Reservations[*].Instances[*].[PublicIpAddress]' --region ${region} --no-cli-pager)
+IP=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=$(whoami)-runner" --output text --query 'Reservations[*].Instances[*].[PublicIpAddress]' --region ${region} --no-cli-pager)
+
+if [[ -z ${IP} ]] ; then
+	echo "Could not find a runner, ec2 describe returned nothing."
+	exit 1
+fi
 
 # SendEnv requires the remote side to also AcceptEnv, so make sure sshd_config is altered appropriately
-exec ssh -o SendEnv="AWS_*" -A ${AWS_USER}@"${IP}" $*
+exec ssh -o SendEnv="AWS_*" -A ${AWS_USER}@"${IP}" "$@"
