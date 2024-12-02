@@ -79,7 +79,7 @@ else
 	exit 1
 fi
 
-IP=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=$(whoami)-runner" --output text --query 'Reservations[*].Instances[*].[PublicIpAddress]' --region ${region} --no-cli-pager)
+IP=$(aws ec2 describe-instances --filters Name=tag:Name,Values="$(whoami)-runner" Name=instance-state-name,Values=running --output text --query 'Reservations[*].Instances[*].[PublicIpAddress]' --region ${region} --no-cli-pager)
 
 if [[ -z ${IP} ]] ; then
 	echo "Could not find a runner, ec2 describe returned nothing."
