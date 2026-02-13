@@ -5,6 +5,8 @@
 #bartender
 #caffeine
 clion
+claude
+openai
 controlplane
 cyberduck
 docker
