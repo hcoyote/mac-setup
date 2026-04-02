@@ -15,6 +15,11 @@ variables for use on the other side.
 
     -h          display this help and exit
     -c          copy AWS creds to clipboard and restore clipboard later
+
+note: needs https://github.com/jaxxstorm/aws-sso-creds
+  brew tap jaxxstorm/tap
+  brew install aws-sso-creds
+
 EOF
 }
 
@@ -76,6 +81,8 @@ if aws-sso-creds version >/dev/null 2>&1 ; then
 	fi
 else
 	echo >&2 "asked for getting temporary creds, but could not find aws-sso-creds command"
+    echo >&2 ""
+    echo >&2 "Install via 'brew tap jaxxstorm/tap && brew install aws-sso-creds'"
 	exit 1
 fi
 
