@@ -87,4 +87,4 @@ if [[ -z ${IP} ]] ; then
 fi
 
 # SendEnv requires the remote side to also AcceptEnv, so make sure sshd_config is altered appropriately
-exec ssh -o SendEnv="AWS_*" -A ${AWS_USER}@"${IP}" "$@"
+exec ssh -o SendEnv="AWS_ACCESS_KEY_ID" -o SendEnv="AWS_SECRET_ACCESS_KEY" -o SendEnv="AWS_SESSION_TOKEN" -A ${AWS_USER}@"${IP}" "$@"
