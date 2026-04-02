@@ -1,7 +1,7 @@
 #!/bin/bash
 
 seconds=30
-region=us-west-2
+region=${AWS_PROFILE_REGION:-us-west-2}
 AWS_USER=ubuntu
 
 # Usage info
@@ -15,11 +15,6 @@ variables for use on the other side.
 
     -h          display this help and exit
     -c          copy AWS creds to clipboard and restore clipboard later
-
-note: needs https://github.com/jaxxstorm/aws-sso-creds
-  brew tap jaxxstorm/tap
-  brew install aws-sso-creds
-
 EOF
 }
 
@@ -27,7 +22,7 @@ OPTIND=1
 # Resetting OPTIND is necessary if getopts was used previously in the script.
 # It is a good idea to make OPTIND local if you process options in a function.
 
-while getopts hurc opt; do
+while getopts hr:u:c opt; do
     case $opt in
         h)
             show_help
@@ -35,9 +30,9 @@ while getopts hurc opt; do
             ;;
         c)  CREDS_TO_CLIPBOARD=1
             ;;
-        r)  region=${OPTIND}
+        r)  region=${OPTARG}
 	    ;;
-        u)  AWS_USER=${OPTIND}
+        u)  AWS_USER=${OPTARG}
 	    ;;
         *)
             show_help >&2
@@ -81,8 +76,6 @@ if aws-sso-creds version >/dev/null 2>&1 ; then
 	fi
 else
 	echo >&2 "asked for getting temporary creds, but could not find aws-sso-creds command"
-    echo >&2 ""
-    echo >&2 "Install via 'brew tap jaxxstorm/tap && brew install aws-sso-creds'"
 	exit 1
 fi
 
