@@ -27,3 +27,14 @@ fi
 cd ${datedirectory}
 
 }
+
+function Dls {
+  ls ${HOME}/tmp/${1}
+}
+
+function _Dls {
+  local -a dirs
+  dirs=(${HOME}/tmp/*(N/:t))
+  _describe 'directory' dirs
+}
+compdef _Dls Dls
